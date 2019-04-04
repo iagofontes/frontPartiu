@@ -17,6 +17,9 @@ import { SolicitarVeiculoComponent } from './solicitar.veiculo/solicitar.veiculo
 import { NaoEncontradoComponent } from './nao.encontrado/nao.encontrado.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { SnackBarMessageComponent } from './inicio/inicio.component';
+import { TopoComponent } from './topo/topo.component';
+import { InformacoesVeiculoComponent } from './informacoes-veiculo/informacoes-veiculo.component';
+import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-corrida.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { SnackBarMessageComponent } from './inicio/inicio.component';
     SolicitarVeiculoComponent,
     NaoEncontradoComponent,
     InicioComponent,
-    SnackBarMessageComponent
+    SnackBarMessageComponent,
+    TopoComponent,
+    InformacoesVeiculoComponent,
+    InformacoesCorridaComponent
   ],
   imports: [
     BrowserModule,

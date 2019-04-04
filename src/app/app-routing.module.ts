@@ -4,10 +4,14 @@ import { SolicitarVeiculoComponent } from './solicitar.veiculo/solicitar.veiculo
 import { AppComponent } from './app.component';
 import { NaoEncontradoComponent } from './nao.encontrado/nao.encontrado.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { InformacoesVeiculoComponent } from './informacoes-veiculo/informacoes-veiculo.component';
+import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-corrida.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'solicitarveiculo', component: SolicitarVeiculoComponent },
+  { path: 'infoVeiculo', component: InformacoesVeiculoComponent },
+  { path: 'infoCorrida', component: InformacoesCorridaComponent },
   { path: '**', component: NaoEncontradoComponent }
 ];
 
