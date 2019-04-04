@@ -16,13 +16,19 @@ import { AppComponent } from './app.component';
 import { SolicitarVeiculoComponent } from './solicitar.veiculo/solicitar.veiculo.component';
 import { NaoEncontradoComponent } from './nao.encontrado/nao.encontrado.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { TopoComponent } from './topo/topo.component';
+import { InformacoesVeiculoComponent } from './informacoes-veiculo/informacoes-veiculo.component';
+import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-corrida.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SolicitarVeiculoComponent,
     NaoEncontradoComponent,
-    InicioComponent
+    InicioComponent,
+    TopoComponent,
+    InformacoesVeiculoComponent,
+    InformacoesCorridaComponent
   ],
   imports: [
     BrowserModule,

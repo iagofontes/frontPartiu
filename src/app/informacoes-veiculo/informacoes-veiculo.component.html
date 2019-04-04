@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col s8 offset-s2">
+    <mat-card class="example-card">
+      <div class="row center">
+        <mat-card-title>Seu veículo está a caminho...</mat-card-title>
+      </div>
+
+      <div class="row top-buffer">
+        <div class="col s2 -bold offset-s4">
+          <span>PLACA:</span>
+        </div>
+        <div class="col s4">
+          <span>{{ dados.placa }}</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s2 -bold offset-s4">
+          <span>VALOR:</span>
+        </div>
+        <div class="col s4">
+          <span>{{ dados.valor |  currency:'BRL': true }}</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s2 -bold offset-s4">
+          <span>CHEGARÁ EM:</span>
+        </div>
+        <div class="col s4">
+          <span>{{ dados.chegaraEm }} minutos</span>
+        </div>
+      </div>
+
+      <div class="row center top-buffer">
+        <div class="col s6">
+          <mat-card-actions>
+            <button mat-raised-button color="primary">Veículo Chegou</button>
+          </mat-card-actions>
+        </div>
+        <div class="col s6">
+            <mat-card-actions>
+              <button mat-raised-button>Cancelar Viagem</button>
+            </mat-card-actions>
+          </div>
+      </div>
+
+    </mat-card>
+  </div>
+</div>
