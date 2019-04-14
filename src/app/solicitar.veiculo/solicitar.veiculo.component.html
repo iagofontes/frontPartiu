@@ -1,22 +1,45 @@
-<div class="row center">
-  <div class="col s8">
-    <mat-card class="example-card center">
-      <mat-card-header>
-        <div class="row center">
-          <mat-card-title>Qual o seu nome ?</mat-card-title>
-        </div>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="nome_cliente" type="text" class="validate">
-            <label for="nome_cliente">Nome</label>
+<div class="row">
+  <div class="col s10 m6 offset-s1 offset-m3">
+    <mat-card>
+      <div class="row center">
+        <div class="col s12 m8">
+          <!-- <h5>Qual o seu nome ?</h5> -->
+          <div class="input-field">
+            <input id="localizacao_cliente" type="text" class="validate" [(ngModel)]="clienteLocalizacao" (blur)="preencherLocalizacao(clienteLocalizacao, 'atual')">
+            <label for="localizacao_cliente">CEP atual</label>
           </div>
         </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>Continuar</button>
-      </mat-card-actions>
+        <div class="col s12 m4">
+          <div class="input-field">
+            <input id="numero_cliente" type="text" class="validate" [(ngModel)]="clienteNumero">
+            <label for="numero_cliente">Número atual</label>
+          </div>
+        </div>
+        <div class="col s12 descricao">
+          <!-- informações sobre o endereco depois de buscar no via-cep -->
+          <span id="descricao_localizacao_atual">{{localizacaoAtual}}</span>
+        </div>
+        <div class="col s12 m8">
+          <!-- <h5>Qual o seu nome ?</h5> -->
+          <div class="input-field">
+            <input id="localizacao_destino_cliente" type="text" class="validate" [(ngModel)]="clienteDestino"  (blur)="preencherLocalizacao(clienteDestino, 'destino')">
+            <label for="localizacao_destino_cliente">CEP Destino</label>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="input-field">
+            <input id="numero_destino_cliente" type="text" class="validate" [(ngModel)]="clienteDestinoNumero">
+            <label for="numero_destino_cliente">Número Destino</label>
+          </div>
+        </div>
+        <div class="col s12 descricao">
+          <!-- informações sobre o endereco depois de buscar no via-cep -->
+          <span id="descricao_localizacao_destino">{{localizacaoDestino}}</span>
+        </div>
+        <div class="col s12">
+          <button mat-raised-button color="primary" (click)="informarDestino()">Solicitar Veículo</button>
+        </div>
+      </div>
     </mat-card>
   </div>
 </div>

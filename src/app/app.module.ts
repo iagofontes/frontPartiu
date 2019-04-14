@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import { SnackBarMessageComponent } from './inicio/inicio.component';
 import { TopoComponent } from './topo/topo.component';
 import { InformacoesVeiculoComponent } from './informacoes-veiculo/informacoes-veiculo.component';
 import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-corrida.component';
+import { ViaCepService } from './service/via-cep.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-c
   ],
   imports: [
     BrowserModule,
+    HttpClientModule, 
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -54,7 +57,7 @@ import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-c
   entryComponents: [
     SnackBarMessageComponent
   ],
-  providers: [],
+  providers: [ ViaCepService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
