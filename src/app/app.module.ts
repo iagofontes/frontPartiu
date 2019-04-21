@@ -22,6 +22,7 @@ import { TopoComponent } from './topo/topo.component';
 import { InformacoesVeiculoComponent } from './informacoes-veiculo/informacoes-veiculo.component';
 import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-corrida.component';
 import { ViaCepService } from './service/via-cep.service';
+import { ViagemService } from './service/viagem.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,10 @@ import { ViaCepService } from './service/via-cep.service';
   entryComponents: [
     SnackBarMessageComponent
   ],
-  providers: [ ViaCepService ],
+  providers: [ 
+    ViaCepService, 
+    ViagemService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
