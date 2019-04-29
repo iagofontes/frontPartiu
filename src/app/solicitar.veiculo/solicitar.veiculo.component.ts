@@ -31,11 +31,11 @@ export class SolicitarVeiculoComponent implements OnInit {
     sessionStorage.removeItem('viagem_retorno');
   }
 
-  private preencherLocalizacao(localizacao: string, elementoAtualizar: string): void {
+  public preencherLocalizacao(localizacao: string, elementoAtualizar: string): void {
     this.buscarLocalizacao(localizacao, elementoAtualizar)
   }
 
-  private buscarLocalizacao(cep: string, elementoAtualizar: string): void {
+  public buscarLocalizacao(cep: string, elementoAtualizar: string): void {
     this.viaCepService
       .buscarCep(cep)
       .subscribe((infos: ICep)=>{
@@ -49,14 +49,14 @@ export class SolicitarVeiculoComponent implements OnInit {
       });
   }
 
-  private formatarLocalizacao(localizacao: ICep): string {
+  public formatarLocalizacao(localizacao: ICep): string {
     if(localizacao.logradouro != '') {
       return localizacao.logradouro.concat(' - ', localizacao.bairro, ', ', localizacao.localidade, ' - ', localizacao.uf)
     }
     return "";
   }
 
-  private solicitarVeiculoDisponivel() {
+  public solicitarVeiculoDisponivel() {
     let viagem = this.montarViagem();
 
     if(this.validarViagem(viagem)) {
@@ -78,7 +78,7 @@ export class SolicitarVeiculoComponent implements OnInit {
 
   }
 
-  private montarViagem(): IViagem {
+  public montarViagem(): IViagem {
     return {
       "cepAtual":this.clienteLocalizacao, 
       "numeroAtual":this.numeroAtualCliente,
@@ -88,7 +88,7 @@ export class SolicitarVeiculoComponent implements OnInit {
     };
   }
 
-  private validarViagem(viagem: IViagem): boolean {
+  public validarViagem(viagem: IViagem): boolean {
 
     if(
       (viagem.cepAtual != '')

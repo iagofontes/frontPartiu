@@ -45,25 +45,25 @@ export class InicioComponent implements OnInit {
     }
   }
 
-  validarNome(): boolean {
+  public validarNome(): boolean {
     if (this.clienteNome.length <= 0) {
       return false;
     }
     return true;
   }
 
-  showSnackBarWithMessage(message: string) {
+  public showSnackBarWithMessage(message: string) {
     sessionStorage.setItem('messageSnack', message);
     this.snackBar.openFromComponent(SnackBarMessageComponent, {
       duration: 5 * 1000,
     });
   }
 
-  alterarNomeNavBar(nome: string) {
+  public alterarNomeNavBar(nome: string) {
     this.onUserNameChange.emit(nome);
   }
 
-  salvarNomeCliente(nome: string) {
+  public salvarNomeCliente(nome: string) {
     sessionStorage.setItem('cliente', nome);
   }
 }

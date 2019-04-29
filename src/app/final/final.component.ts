@@ -12,7 +12,7 @@ export class FinalComponent implements OnInit {
 
   ngOnInit() { }
 
-  private retornarInicio() {
+  public retornarInicio() {
     this.route.navigate(['']);
   }
 

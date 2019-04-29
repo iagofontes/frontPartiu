@@ -20,7 +20,7 @@ export class InformacoesCorridaComponent implements OnInit {
     this.dados = JSON.parse(sessionStorage.getItem('viagem_retorno').toString());
   }
 
-  private finalizarCorrida() {
+  public finalizarCorrida() {
     let operarViagem : IOperarViagem = {
       idViagem: this.dados.id,
       operacao: 'FINALIZADO'

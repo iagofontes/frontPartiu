@@ -19,7 +19,7 @@ export class InformacoesVeiculoComponent implements OnInit {
     this.dados = JSON.parse(sessionStorage.getItem('viagem_retorno').toString());
   }
 
-  private informarChegadaVeiculo() {
+  public informarChegadaVeiculo() {
     let operarViagem : IOperarViagem = {
       idViagem: this.dados.id,
       operacao: 'EM ANDAMENTO'
@@ -44,7 +44,7 @@ export class InformacoesVeiculoComponent implements OnInit {
       )
   }
 
-  private cancelarViagem() {
+  public cancelarViagem() {
     this.viagemService
       .cancelarViagem(this.dados.id)
       .subscribe(
