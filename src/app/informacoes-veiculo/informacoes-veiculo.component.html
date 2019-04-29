@@ -10,7 +10,7 @@
           <span>PLACA:</span>
         </div>
         <div class="col s4">
-          <span>{{ dados.placa }}</span>
+          <span>{{ dados.placaVeiculo }}</span>
         </div>
       </div>
 
@@ -28,19 +28,19 @@
           <span>CHEGARÁ EM:</span>
         </div>
         <div class="col s4">
-          <span>{{ dados.chegaraEm }} minutos</span>
+          <span>{{ dados.chegaEm }} minutos</span>
         </div>
       </div>
 
       <div class="row center top-buffer">
         <div class="col s6">
           <mat-card-actions>
-            <button mat-raised-button color="primary">Veículo Chegou</button>
+            <button mat-raised-button color="primary" (click)="informarChegadaVeiculo()">Veículo Chegou</button>
           </mat-card-actions>
         </div>
         <div class="col s6">
             <mat-card-actions>
-              <button mat-raised-button>Cancelar Viagem</button>
+              <button mat-raised-button (click)="cancelarViagem()">Cancelar Viagem</button>
             </mat-card-actions>
           </div>
       </div>

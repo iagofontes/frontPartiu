@@ -31,7 +31,8 @@ export class InicioComponent implements OnInit {
     private snackBar: MatSnackBar
     ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    sessionStorage.removeItem('cliente');
   }
 
   informarDestino() {
@@ -59,9 +60,7 @@ export class InicioComponent implements OnInit {
   }
 
   alterarNomeNavBar(nome: string) {
-    console.log('emitiu');
     this.onUserNameChange.emit(nome);
-    console.log(this.onUserNameChange);
   }
 
   salvarNomeCliente(nome: string) {

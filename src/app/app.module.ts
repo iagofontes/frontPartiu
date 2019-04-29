@@ -23,6 +23,7 @@ import { InformacoesVeiculoComponent } from './informacoes-veiculo/informacoes-v
 import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-corrida.component';
 import { ViaCepService } from './service/via-cep.service';
 import { ViagemService } from './service/viagem.service';
+import { FinalComponent } from './final/final.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ViagemService } from './service/viagem.service';
     SnackBarMessageComponent,
     TopoComponent,
     InformacoesVeiculoComponent,
-    InformacoesCorridaComponent
+    InformacoesCorridaComponent,
+    FinalComponent
   ],
   imports: [
     BrowserModule,

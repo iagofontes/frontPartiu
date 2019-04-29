@@ -6,12 +6,14 @@ import { NaoEncontradoComponent } from './nao.encontrado/nao.encontrado.componen
 import { InicioComponent } from './inicio/inicio.component';
 import { InformacoesVeiculoComponent } from './informacoes-veiculo/informacoes-veiculo.component';
 import { InformacoesCorridaComponent } from './informacoes-corrida/informacoes-corrida.component';
+import { FinalComponent } from './final/final.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'solicitarveiculo', component: SolicitarVeiculoComponent },
   { path: 'infoVeiculo', component: InformacoesVeiculoComponent },
   { path: 'infoCorrida', component: InformacoesCorridaComponent },
+  { path: 'final', component: FinalComponent },
   { path: '**', component: NaoEncontradoComponent }
 ];
 

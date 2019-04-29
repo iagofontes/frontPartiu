@@ -1,7 +1,9 @@
+import { IVeiculo } from './veiculo-interface';
+
 export interface IViagemRetorno {
-    idViagem: string,
-    placaVeiculo: string,
+    id: string,
+    veiculo: IVeiculo,
     valor: number,
-    chegaEm: number,
+    chegada: number,
     status: string
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { IViagemRetorno } from '../interface/viagem-retorno-interface';
+import { ViagemService } from '../service/viagem.service';
+import { IOperarViagem } from '../interface/operar-viagem-interface';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-informacoes-veiculo',
@@ -7,17 +11,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InformacoesVeiculoComponent implements OnInit {
 
-  dados: any;
+  dados: IViagemRetorno;
 
-  constructor() { }
+  constructor(private viagemService: ViagemService, private route: Router) { }
 
   ngOnInit() {
+    this.dados = JSON.parse(sessionStorage.getItem('viagem_retorno').toString());
+  }
 
-    this.dados = {
-      placa: 'ANH-5472',
-      valor: 12.58,
-      chegaraEm: 16
-    }
+  private informarChegadaVeiculo() {
+    let operarViagem : IOperarViagem = {
+      idViagem: this.dados.id,
+      operacao: 'EM ANDAMENTO'
+    };
+
+    this.viagemService
+      .informarChegadaVeiculo(operarViagem)
+      .subscribe(
+        (viagemRetorno: any)=>{
+          if(viagemRetorno.status == 200) {
+            sessionStorage.removeItem('viagem_retorno');
+            sessionStorage.setItem('viagem_retorno', JSON.stringify(viagemRetorno.body));
+            this.route.navigate(['/infoCorrida']);
+          } else {
+            alert('Problemas ao informar chegada de veículo');
+          }
+        },
+        (error:any)=>{
+          console.log(error.message);
+          alert('Problemas ao processar solicitação');
+        }
+      )
+  }
+
+  private cancelarViagem() {
+    this.viagemService
+      .cancelarViagem(this.dados.id)
+      .subscribe(
+        (viagemRetorno: any)=>{
+          if(viagemRetorno.status == 200 || viagemRetorno.status == 204) {
+            sessionStorage.removeItem('viagem_retorno');
+            this.route.navigate(['/']);
+          } else {
+            alert('Problemas ao informar chegada de veículo');
+          }
+        },
+        (error:any)=>{
+          console.log(error.message);
+          alert('Problemas ao processar solicitação');
+        }
+      )
   }
 
 

@@ -4,6 +4,7 @@ import { ViaCepService } from '../service/via-cep.service';
 import { Observable } from 'rxjs';
 import { IViagem } from '../interface/viagem-interface';
 import { ViagemService } from '../service/viagem.service';
+import { Router } from '@angular/router';
 import { isEmpty } from 'rxjs/operators';
 import { IViagemRetorno } from '../interface/viagem-retorno-interface';
 
@@ -14,16 +15,21 @@ import { IViagemRetorno } from '../interface/viagem-retorno-interface';
 })
 export class SolicitarVeiculoComponent implements OnInit {
 
-  @Input() clienteLocalizacao : string;
-  @Input() clienteDestino : string;
-  @Input() numeroAtualCliente : number;
-  @Input() numeroDestinoCliente : number;
+  @Input() clienteLocalizacao : string = '01538001';
+  @Input() clienteDestino : string = '01001001';
+  @Input() numeroAtualCliente : number = 12;
+  @Input() numeroDestinoCliente : number = 15;
   localizacaoAtual   = 'Localizacao Atual';
   localizacaoDestino = 'Localizacao Destino';
 
-  constructor(private viaCepService: ViaCepService, private viagemService: ViagemService) { }
+  constructor(
+    private viaCepService: ViaCepService, 
+    private viagemService: ViagemService,
+    private route: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    sessionStorage.removeItem('viagem_retorno');
+  }
 
   private preencherLocalizacao(localizacao: string, elementoAtualizar: string): void {
     this.buscarLocalizacao(localizacao, elementoAtualizar)
@@ -33,13 +39,13 @@ export class SolicitarVeiculoComponent implements OnInit {
     this.viaCepService
       .buscarCep(cep)
       .subscribe((infos: ICep)=>{
-        console.log(infos)
         if(elementoAtualizar=='atual')
           this.localizacaoAtual = this.formatarLocalizacao(infos)
         else 
           this.localizacaoDestino = this.formatarLocalizacao(infos)
       }, (error)=>{
-        console.log(error.message)
+        alert('CEP não encontrado.');
+        console.log(error.message);
       });
   }
 
@@ -52,17 +58,22 @@ export class SolicitarVeiculoComponent implements OnInit {
 
   private solicitarVeiculoDisponivel() {
     let viagem = this.montarViagem();
+
     if(this.validarViagem(viagem)) {
       this.viagemService
         .iniciarViagem(viagem)
         .subscribe(
-          (viagemRetorno: IViagemRetorno)=>{
-            
+          (viagemRetorno: any)=>{
+            sessionStorage.setItem('viagem_retorno', JSON.stringify(viagemRetorno.body));
+            this.route.navigate(['/infoVeiculo']);
           },
           (error:any)=>{
             console.log(error.message);
+            alert('Problemas ao processar solicitação');
           }
         )
+    } else {
+      console.log('viagem inválida');
     }
 
   }
