@@ -2,6 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ICep } from '../interface/cep-interface';
 import { ViaCepService } from '../service/via-cep.service';
 import { Observable } from 'rxjs';
+import { IViagem } from '../interface/viagem-interface';
+import { ViagemService } from '../service/viagem.service';
+import { Router } from '@angular/router';
+import { isEmpty } from 'rxjs/operators';
+import { IViagemRetorno } from '../interface/viagem-retorno-interface';
 
 @Component({
   selector: 'app-solicitar-veiculo',
@@ -10,16 +15,23 @@ import { Observable } from 'rxjs';
 })
 export class SolicitarVeiculoComponent implements OnInit {
 
-  @Input() clienteLocalizacao : String;
-  @Input() clienteDestino : String;
-           localizacaoAtual   = 'Localizacao Atual';
-           localizacaoDestino = 'Localizacao Destino';
+  @Input() clienteLocalizacao : string = '01538001';
+  @Input() clienteDestino : string = '01001001';
+  @Input() numeroAtualCliente : number = 12;
+  @Input() numeroDestinoCliente : number = 15;
+  localizacaoAtual   = 'Localizacao Atual';
+  localizacaoDestino = 'Localizacao Destino';
 
-  constructor(private viaCepService: ViaCepService) { }
+  constructor(
+    private viaCepService: ViaCepService, 
+    private viagemService: ViagemService,
+    private route: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    sessionStorage.removeItem('viagem_retorno');
+  }
 
-  preencherLocalizacao(localizacao: string, elementoAtualizar: string): void {
+  private preencherLocalizacao(localizacao: string, elementoAtualizar: string): void {
     this.buscarLocalizacao(localizacao, elementoAtualizar)
   }
 
@@ -27,13 +39,13 @@ export class SolicitarVeiculoComponent implements OnInit {
     this.viaCepService
       .buscarCep(cep)
       .subscribe((infos: ICep)=>{
-        console.log(infos)
         if(elementoAtualizar=='atual')
           this.localizacaoAtual = this.formatarLocalizacao(infos)
         else 
           this.localizacaoDestino = this.formatarLocalizacao(infos)
       }, (error)=>{
-        console.log(error.message)
+        alert('CEP não encontrado.');
+        console.log(error.message);
       });
   }
 
@@ -42,6 +54,53 @@ export class SolicitarVeiculoComponent implements OnInit {
       return localizacao.logradouro.concat(' - ', localizacao.bairro, ', ', localizacao.localidade, ' - ', localizacao.uf)
     }
     return "";
+  }
+
+  private solicitarVeiculoDisponivel() {
+    let viagem = this.montarViagem();
+
+    if(this.validarViagem(viagem)) {
+      this.viagemService
+        .iniciarViagem(viagem)
+        .subscribe(
+          (viagemRetorno: any)=>{
+            sessionStorage.setItem('viagem_retorno', JSON.stringify(viagemRetorno.body));
+            this.route.navigate(['/infoVeiculo']);
+          },
+          (error:any)=>{
+            console.log(error.message);
+            alert('Problemas ao processar solicitação');
+          }
+        )
+    } else {
+      console.log('viagem inválida');
+    }
+
+  }
+
+  private montarViagem(): IViagem {
+    return {
+      "cepAtual":this.clienteLocalizacao, 
+      "numeroAtual":this.numeroAtualCliente,
+      "cepDestino":this.clienteDestino,
+      "numeroDestino":this.numeroDestinoCliente,
+      "cliente":sessionStorage.getItem('cliente')
+    };
+  }
+
+  private validarViagem(viagem: IViagem): boolean {
+
+    if(
+      (viagem.cepAtual != '')
+      && (viagem.cepDestino != '')
+      && (viagem.numeroAtual > 0)
+      && (viagem.numeroDestino > 0)
+      && (viagem.cliente != '')
+    ) {
+      return true;
+    }
+
+    return false;
   }
 
 }

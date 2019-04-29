@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -24,17 +24,21 @@ export class SnackBarMessageComponent implements OnInit {
 export class InicioComponent implements OnInit {
 
   @Input() clienteNome = '';
+  @Output() onUserNameChange = new EventEmitter();
 
   constructor(
     public router: Router,
     private snackBar: MatSnackBar
     ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    sessionStorage.removeItem('cliente');
   }
 
   informarDestino() {
     if (this.validarNome()) {
+      this.alterarNomeNavBar(this.clienteNome);
+      this.salvarNomeCliente(this.clienteNome);
       this.router.navigate(['/solicitarveiculo']);
     } else {
       this.showSnackBarWithMessage('Digite seu nome para continuar');
@@ -53,5 +57,13 @@ export class InicioComponent implements OnInit {
     this.snackBar.openFromComponent(SnackBarMessageComponent, {
       duration: 5 * 1000,
     });
+  }
+
+  alterarNomeNavBar(nome: string) {
+    this.onUserNameChange.emit(nome);
+  }
+
+  salvarNomeCliente(nome: string) {
+    sessionStorage.setItem('cliente', nome);
   }
 }

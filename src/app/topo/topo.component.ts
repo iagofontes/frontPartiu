@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-topo',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopoComponent implements OnInit {
 
+  public userName = '';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onUserNameChange(userNamePassed: string) {
+    console.log(userNamePassed);
+    this.userName = userNamePassed;
   }
 
 }

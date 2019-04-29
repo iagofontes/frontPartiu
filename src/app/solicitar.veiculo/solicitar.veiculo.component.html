@@ -3,7 +3,6 @@
     <mat-card>
       <div class="row center">
         <div class="col s12 m8">
-          <!-- <h5>Qual o seu nome ?</h5> -->
           <div class="input-field">
             <input id="localizacao_cliente" type="text" class="validate" [(ngModel)]="clienteLocalizacao" (blur)="preencherLocalizacao(clienteLocalizacao, 'atual')">
             <label for="localizacao_cliente">CEP atual</label>
@@ -11,16 +10,14 @@
         </div>
         <div class="col s12 m4">
           <div class="input-field">
-            <input id="numero_cliente" type="text" class="validate" [(ngModel)]="clienteNumero">
+            <input id="numero_cliente" type="text" class="validate" [(ngModel)]="numeroAtualCliente">
             <label for="numero_cliente">Número atual</label>
           </div>
         </div>
         <div class="col s12 descricao">
-          <!-- informações sobre o endereco depois de buscar no via-cep -->
           <span id="descricao_localizacao_atual">{{localizacaoAtual}}</span>
         </div>
         <div class="col s12 m8">
-          <!-- <h5>Qual o seu nome ?</h5> -->
           <div class="input-field">
             <input id="localizacao_destino_cliente" type="text" class="validate" [(ngModel)]="clienteDestino"  (blur)="preencherLocalizacao(clienteDestino, 'destino')">
             <label for="localizacao_destino_cliente">CEP Destino</label>
@@ -28,16 +25,15 @@
         </div>
         <div class="col s12 m4">
           <div class="input-field">
-            <input id="numero_destino_cliente" type="text" class="validate" [(ngModel)]="clienteDestinoNumero">
+            <input id="numero_destino_cliente" type="text" class="validate" [(ngModel)]="numeroDestinoCliente">
             <label for="numero_destino_cliente">Número Destino</label>
           </div>
         </div>
         <div class="col s12 descricao">
-          <!-- informações sobre o endereco depois de buscar no via-cep -->
           <span id="descricao_localizacao_destino">{{localizacaoDestino}}</span>
         </div>
         <div class="col s12">
-          <button mat-raised-button color="primary" (click)="informarDestino()">Solicitar Veículo</button>
+          <button mat-raised-button color="primary" (click)="solicitarVeiculoDisponivel()">Solicitar Veículo</button>
         </div>
       </div>
     </mat-card>

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { IOperarViagem } from '../interface/operar-viagem-interface';
+import { ViagemService } from '../service/viagem.service';
+import { Router } from '@angular/router';
+import { IOperarViagemRetorno } from '../interface/operar-viagem-retorno-interface';
+import { IViagemRetorno } from '../interface/viagem-retorno-interface';
 
 @Component({
   selector: 'app-informacoes-corrida',
@@ -7,16 +12,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InformacoesCorridaComponent implements OnInit {
 
-  dados: any;
+  public dados: IViagemRetorno;
 
-  constructor() { }
+  constructor(private viagemService: ViagemService, private route: Router) { }
 
   ngOnInit() {
+    this.dados = JSON.parse(sessionStorage.getItem('viagem_retorno').toString());
+  }
 
-    this.dados = {
-      valor: 12.58,
-      duracao: 65
-    }
+  private finalizarCorrida() {
+    let operarViagem : IOperarViagem = {
+      idViagem: this.dados.id,
+      operacao: 'FINALIZADO'
+    };
+
+    this.viagemService
+      .finalizarViagem(operarViagem)
+      .subscribe(
+        (finalizarRetorno: any)=>{
+          if(finalizarRetorno.status == 200) {
+            sessionStorage.removeItem('viagem_retorno');
+            this.route.navigate(['/final']);
+          } else {
+            alert('Problemas ao finalizar corrida.');
+          }
+        },
+        (error:any)=>{
+          console.log(error.message);
+          alert('Problemas ao processar solicitação');
+        }
+      )
   }
 
 }

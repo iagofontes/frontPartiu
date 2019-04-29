@@ -4,35 +4,29 @@
         <div class="row center">
           <mat-card-title>Você está a caminho...</mat-card-title>
         </div>
-  
-        
-  
         <div class="row top-buffer">
           <div class="col s2 -bold offset-s4">
             <span>VALOR:</span>
           </div>
           <div class="col s4">
-            <span>{{ dados.valor |  currency:'BRL': true }}</span>
+            <span>{{ dados.VALOR |  currency:'BRL': true }}</span>
           </div>
         </div>
-  
         <div class="row">
           <div class="col s2 -bold offset-s4">
             <span>DURAÇÃO:</span>
           </div>
           <div class="col s4">
-            <span>{{ dados.duracao }} minutos</span>
+            <span>{{ dados.DURACAO }} minutos</span>
           </div>
         </div>
-  
         <div class="row center top-buffer">
            <div class="col s12">
               <mat-card-actions>
-                <button mat-raised-button color="primary">Finalizar Viagem</button>
+                <button mat-raised-button color="primary" (click)="finalizarCorrida()">Finalizar Viagem</button>
               </mat-card-actions>
             </div>
         </div>
-  
       </mat-card>
     </div>
   </div>
