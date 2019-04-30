@@ -15,10 +15,10 @@ import { IViagemRetorno } from '../interface/viagem-retorno-interface';
 })
 export class SolicitarVeiculoComponent implements OnInit {
 
-  @Input() clienteLocalizacao : string = '01538001';
-  @Input() clienteDestino : string = '01001001';
-  @Input() numeroAtualCliente : number = 12;
-  @Input() numeroDestinoCliente : number = 15;
+  @Input() clienteLocalizacao : string = '';
+  @Input() clienteDestino : string = '';
+  @Input() numeroAtualCliente : number = 0;
+  @Input() numeroDestinoCliente : number = 0;
   localizacaoAtual   = 'Localizacao Atual';
   localizacaoDestino = 'Localizacao Destino';
 
