@@ -23,7 +23,7 @@ export class InformacoesCorridaComponent implements OnInit {
   public finalizarCorrida() {
     let operarViagem : IOperarViagem = {
       idViagem: this.dados.id,
-      operacao: 'FINALIZADO'
+      operacao: 'FINALIZAR'
     };
 
     this.viagemService

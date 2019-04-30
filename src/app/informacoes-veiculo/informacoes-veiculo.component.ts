@@ -22,7 +22,7 @@ export class InformacoesVeiculoComponent implements OnInit {
   public informarChegadaVeiculo() {
     let operarViagem : IOperarViagem = {
       idViagem: this.dados.id,
-      operacao: 'EM ANDAMENTO'
+      operacao: 'INICIAR'
     };
 
     this.viagemService
