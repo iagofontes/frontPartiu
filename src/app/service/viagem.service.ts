@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IViagem } from '../interface/viagem-interface';
 import { IOperarViagem } from '../interface/operar-viagem-interface';
 
-const serverPath = "http://ec2-18-231-89-75.sa-east-1.compute.amazonaws.com:8085/frota-service";
+const serverPath = "https://calm-basin-48860.herokuapp.com/frota-service";
 
 @Injectable()
 export class ViagemService {
